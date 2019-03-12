@@ -9,12 +9,13 @@ const filterResults = (query) => {
     query[key] = query[key] || '';
     tempResult = result.filter((el) => {
       return el[key].includes(query[key])
-    })
+    });
     result = tempResult;
-  })
+  });
   return result;
-}
-router.get('/', function ({
+};
+
+router.get('/data', function ({
     query
   },
   res, next) {
@@ -34,7 +35,7 @@ router.get('/', function ({
   if (funds > 0) {
     result = result.filter((el) => parseInt(el.funds) > funds)
   } else {
-    result = (funds != 0 && funds !== undefined) ? result.filter((el) => parseInt(el.funds) < Math.abs(funds)) : result
+    result = (funds !== 0 && funds !== undefined) ? result.filter((el) => parseInt(el.funds) < Math.abs(funds)) : result
   }
   let {
     offset,
@@ -48,13 +49,14 @@ router.get('/', function ({
     count: result.length
   })
 });
+
 router.put('/update/:id', function (req, res, next) {
   data[req.params.id - 1] = {
     id: +req.params.id,
     ...req.body
-  }
+  };
   res.status(200);
   res.send(data[req.params.id - 1]);
-})
+});
 
 module.exports = router;
