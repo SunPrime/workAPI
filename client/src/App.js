@@ -75,7 +75,13 @@ class App extends Component {
   };
 
    handleCellClick = (event) => {
-       console.log(event.target.innerText);
+       let currentEvent = event.currentTarget,
+           currentValue = event.target.innerText,
+           currentId = +currentEvent.firstChild.innerText,
+           currentNameField = event.target.getAttribute('class') ;
+       console.log(currentValue);
+       console.log(currentId);
+       console.log(currentNameField);
    };
 
   handleRecordsChange = ({ target: { value } }) => {
@@ -147,7 +153,7 @@ class App extends Component {
                   <th>phone</th>
                   <th>funds</th>
               </tr>
-                  {result.map((data, index) =>
+                  {result.map((data) =>
                       <Person
                           key={data.id}
                           id={data.id}

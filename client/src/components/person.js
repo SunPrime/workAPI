@@ -3,12 +3,12 @@ import PropTypes from 'prop-types';
 
 const Person = ({ id, name, email, funds, city, phone, onClick }) => (
     <tr onClick={onClick}>
-       <td>{id}</td>
-       <td>{name}</td>
-       <td>{email}</td>
-       <td>{city}</td>
-       <td>{phone}</td>
-       <td>{funds}</td>
+       <td className='id'>{id}</td>
+       <td className='name'>{name}</td>
+       <td className='email'>{email}</td>
+       <td className='city'>{city}</td>
+       <td className='phone'>{phone}</td>
+       <td className='funds'>{funds}</td>
     </tr>
 );
 

@@ -1,8 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import './pagination.css';
-
 const renderPaginationBtns = (onClick, page, lastPage) => {
     const startBtns = [page, page + 1, page + 2];
     const gapBtns = [page - 2, page - 1, page];
@@ -34,7 +32,7 @@ const renderPaginationBtns = (onClick, page, lastPage) => {
 };
 
 const Pagination = ({ onClick, page, lastPage }) => (
-    <div className="paginationWrapper">
+    <div>
         { page !== 1 && <button onClick={onClick} data-name="prev">{'<<'}</button>}
         {renderPaginationBtns( onClick, page, lastPage )}
         { page !== lastPage && <button onClick={onClick} data-name="next">{'>>'}</button>}
