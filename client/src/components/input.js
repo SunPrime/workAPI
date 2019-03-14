@@ -16,6 +16,7 @@ const Input = ({ onKeyPress, onChange, placeholder, name, value }) => (
 Input.propTypes = {
     onChange: PropTypes.func,
     onKeyPress: PropTypes.func,
+    placeholder: PropTypes.string,
     value: PropTypes.string,
     name: PropTypes.string
 };
@@ -23,6 +24,7 @@ Input.propTypes = {
 Input.defaultProps = {
     onChange: () => {},
     onKeyPress: () => {},
+    placeholder: 'search',
     value: '',
     name: ''
 };
