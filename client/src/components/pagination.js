@@ -15,7 +15,12 @@ const renderPaginationBtns = (onClick, page, lastPage) => {
         btnsArr = [...gapBtns, ...middleBtn, ...lastBtns]
     } else if (page < lastPage - 3) {
         btnsArr = [...gapBtns, ...lastBtns] // last 6 pages
-    } else {
+    } else if (page < lastPage - 2) {
+        btnsArr = [ page, page + 1 ]
+    } else if (page < lastPage - 1) {
+        btnsArr = [ page ]
+    }
+    else {
         btnsArr = [...middleBtn, ...lastBtns] // last 3 pages
     }
 
@@ -47,7 +52,7 @@ Pagination.propTypes = {
 
 Pagination.defaultProps = {
     onClick: () => {},
-    page: 0,
+    page: 1,
     lastPage: 0,
 };
 

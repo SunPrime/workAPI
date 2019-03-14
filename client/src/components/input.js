@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Input = ({ onKeyPress, onChange, value }) => (
+const Input = ({ onKeyPress, onChange, placeholder, name, value }) => (
     <td>
         <input
-            placeholder='search name'
             onChange={onChange}
             onKeyPress={onKeyPress}
-            name='name'
+            placeholder={placeholder}
+            name={name}
             value={value}
         />
     </td>

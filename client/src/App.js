@@ -5,10 +5,7 @@ import Input from "./components/input"
 import Select from "./components/select"
 import Pagination from "./components/pagination"
 
-// import './App.css';
-
 const BASE_PATH = '/data';
-const SEARCH_PARAM = 'name=';
 const PAGE_LIMIT = 'limit=';
 const PAGE_OFFSET = 'offset=';
 
@@ -33,7 +30,13 @@ const PAGES = [
 
 class App extends Component {
   state = {
-      searchQuery: '',
+      searchQuery: {
+          name : '',
+          email: '',
+          city: '',
+          phone: '',
+          funds: ''
+      },
       result: [],
       limit: 10,
       offset: 0,
@@ -46,7 +49,8 @@ class App extends Component {
 }
 
   fetchData = (searchQuery, limit, offset) => {
-      let url = `${BASE_PATH}?${PAGE_LIMIT}${limit}&${PAGE_OFFSET}${offset}&${SEARCH_PARAM}${searchQuery}`;
+      // let url = `${BASE_PATH}?${PAGE_LIMIT}${limit}&${PAGE_OFFSET}${offset}&${searchQuery.name ? 'name='  + searchQuery.name : ''}&${searchQuery.email ? 'email=' + searchQuery.email : ''}&${searchQuery.city  ? 'city='  + searchQuery.city : ''}&${searchQuery.phone ? 'phone=' + searchQuery.phone : ''}&${searchQuery.funds ? 'funds=' + searchQuery.funds : ''}`;
+      let url = `${BASE_PATH}?${PAGE_LIMIT}${limit}&${PAGE_OFFSET}${offset}&name=${searchQuery.name}&email=${searchQuery.email}&city=${searchQuery.city}&phone=${searchQuery.phone}&funds=${searchQuery.funds}`;
       fetch(url)
           .then(res => res.json())
           .then(result => this.setData(result))
@@ -57,10 +61,12 @@ class App extends Component {
       this.setState({ result: result.data, count: result.count })
   };
 
-  handleInputChange = ({ target: { value } }) => {
-      this.setState({
-          searchQuery: value
-      })
+  handleInputChange = ({ target: { name, value } }) => {
+      this.setState(prevState => ({
+          ...prevState, searchQuery: {
+              ...prevState.searchQuery, [name]: value
+          }
+      }))
   };
 
   getSearch = ({ key }) => {
@@ -129,6 +135,7 @@ class App extends Component {
 
   render() {
     const { searchQuery, result, limit, count, page } = this.state;
+    const { name, email, city, phone, funds } = searchQuery;
     const lastPage = Math.ceil(count/limit) + 1;
 
     return (
@@ -140,10 +147,41 @@ class App extends Component {
           <table>
               <tbody>
               <tr>
+                  <td></td>
                   <Input
                       onKeyPress={this.getSearch}
                       onChange={this.handleInputChange}
-                      value={searchQuery}
+                      placeholder='search name'
+                      name='name'
+                      value={name}
+                  />
+                  <Input
+                      onKeyPress={this.getSearch}
+                      onChange={this.handleInputChange}
+                      placeholder='search email'
+                      name='email'
+                      value={email}
+                  />
+                  <Input
+                      onKeyPress={this.getSearch}
+                      onChange={this.handleInputChange}
+                      placeholder='search city'
+                      name='city'
+                      value={city}
+                  />
+                  <Input
+                      onKeyPress={this.getSearch}
+                      onChange={this.handleInputChange}
+                      placeholder='search phone'
+                      name='phone'
+                      value={phone}
+                  />
+                  <Input
+                      onKeyPress={this.getSearch}
+                      onChange={this.handleInputChange}
+                      placeholder='search funds'
+                      name='funds'
+                      value={funds}
                   />
               </tr>
               <tr>
