@@ -65,12 +65,13 @@ class App extends Component {
 
   getSearch = ({ key }) => {
       if(key === 'Enter') {
-          const { searchQuery, limit, offset } = this.state;
+          const { searchQuery } = this.state;
           this.setState({
               page: 1,
               offset: 0,
+          }, ()=> {
+              this.fetchData(searchQuery, this.state.limit, this.state.offset);
           });
-          this.fetchData(searchQuery, limit, offset);
       }
   };
 
@@ -92,7 +93,7 @@ class App extends Component {
           offset: 0,
           page: 1
       }, () => {
-          this.fetchData(searchQuery, this.state.limit,this.state.offset);
+          this.fetchData(searchQuery, this.state.limit, this.state.offset);
       })
   };
 
